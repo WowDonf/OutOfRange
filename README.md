@@ -82,21 +82,6 @@ That's the whole addon. One job, done well, no telemetry, no profile sync, no ro
 
 ---
 
-## Notes for Midnight
-
-Midnight introduced significant addon API restrictions (the "addon apocalypse" in 12.0.0). This addon stays inside the allowed surface area:
-
-- It only reads units via `UnitExists`, `UnitCanAttack`, `UnitIsDead`, `UnitIsVisible`.
-- Range is checked via `C_Spell.IsSpellInRange`, which Blizzard explicitly kept callable.
-- The options panel uses the modern `Settings.RegisterCanvasLayoutCategory` API and the modern dropdown menu system (`WowStyle1DropdownTemplate` / `SetupMenu`).
-- The ability list is read from the modern `C_SpellBook` API.
-- Settings use `SavedVariablesPerCharacter`, so each character has its own configuration (and within that, each spec has its own profile).
-- No protected combat decision-making, no automated targeting, no hidden raid debuff scanning.
-
-It should keep working through future 12.x patches without modification.
-
----
-
 ## Feedback and contributions
 
-Found a bug, missing a class ability in auto-detect, or have an idea worth shipping? Open an issue on [GitHub](https://github.com/WowDonf/OutOfRange) or drop a comment on the CurseForge / Wago page. Pull requests welcome.
+Found a bug, missing a class ability in auto-detect, or have an idea worth shipping? Open an issue on [GitHub](https://github.com/WowDonf/OutOfRange) or drop a comment on the CurseForge / Wago page.
