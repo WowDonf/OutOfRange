@@ -1,0 +1,30 @@
+name: Release
+
+# Triggers on any tag that starts with "v" (e.g. v1.7.1, v2.0.0).
+# Push the tag and the build/upload happens automatically.
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v4
+        with:
+          # Fetch full history so the packager can build a useful changelog
+          # from commits if you ever switch off the manual-changelog file.
+          fetch-depth: 0
+
+      - name: Package and release
+        uses: BigWigsMods/packager@v2
+        env:
+          # CurseForge API key (set as a GitHub repo secret, see SETUP below).
+          CF_API_KEY:      ${{ secrets.CF_API_KEY }}
+          # Wago API token (set as a GitHub repo secret).
+          WAGO_API_TOKEN:  ${{ secrets.WAGO_API_TOKEN }}
+          # GitHub token is provided automatically; this uploads the zip as a
+          # GitHub Release asset on the tag.
+          GITHUB_OAUTH:    ${{ secrets.GITHUB_TOKEN }}
