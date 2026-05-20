@@ -1,0 +1,36 @@
+OutOfRange
+Copyright (c) 2025-2026 Donf. All rights reserved.
+
+This license covers every file in this repository EXCEPT the contents of the
+Libs/ directory.
+
+The libraries bundled inside Libs/ are third-party works distributed under
+their own licenses (see the headers of the individual files and the upstream
+sources listed below). They are not covered by the terms of this license and
+remain the property of their original authors.
+
+    Libs/LibStub/              Public Domain (per file header).
+    Libs/CallbackHandler-1.0/  See https://www.wowace.com/projects/callbackhandler-1-0
+    Libs/LibDataBroker-1.1/    See https://github.com/tekkub/libdatabroker-1-1
+    Libs/LibDBIcon-1.0/        See https://www.wowace.com/projects/libdbicon-1-0
+
+-------------------------------------------------------------------------------
+
+All rights reserved. No part of this Software, except for the bundled
+libraries described above, may be reproduced, distributed, modified,
+sublicensed, sold, or transmitted in any form or by any means, without the
+prior written permission of the author.
+
+Personal, non-commercial use of unmodified copies of this Software inside the
+World of Warcraft client, as installed from the official CurseForge, Wago, or
+GitHub Releases distributions of OutOfRange, is permitted.
+
+Contributions submitted to the project (including pull requests, patches, and
+bug reports containing code) become subject to this license unless otherwise
+agreed in writing.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHOR BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY ARISING FROM, OUT
+OF, OR IN CONNECTION WITH THE SOFTWARE.
