@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.10.3
+
+- **Auto-update via the CurseForge app now works properly.** The CurseForge project ID was missing from earlier TOC files, which prevented the CurseForge app from recognizing installed copies for updates. You may need to reinstall once from CurseForge for the app to start tracking it.
+- **Now also published on Wago.** Same addon, alternative distribution channel if you prefer the Wago app.
+- Added a LICENSE file.
+- No gameplay or behavior changes.
+
 ## 1.10.2
 
 - The options panel now reopens automatically when you click the **X** to lock the warning frame after using "Unlock frame to move." Saves a click and a slash command. The slash `/oor unlock` path still leaves the panel closed when you lock, since typing a slash command doesn't imply you want options to pop up.

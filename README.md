@@ -85,3 +85,9 @@ That's the whole addon. One job, done well, no telemetry, no profile sync, no ro
 ## Feedback and contributions
 
 Found a bug, missing a class ability in auto-detect, or have an idea worth shipping? Open an issue on [GitHub](https://github.com/WowDonf/OutOfRange) or drop a comment on the CurseForge / Wago page.
+
+---
+
+## License
+
+All rights reserved — see [LICENSE](LICENSE). Bundled libraries under `Libs/` (LibStub, CallbackHandler-1.0, LibDataBroker-1.1, LibDBIcon-1.0) are distributed under their own respective licenses by their original authors.

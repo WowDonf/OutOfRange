@@ -72,4 +72,10 @@ That's the whole addon. One job, done well, no telemetry, no profile sync, no ro
 
 ## Feedback and contributions
 
-Found a bug, missing a class ability in auto-detect, or have an idea worth shipping? Open an issue on [GitHub](https://github.com/YOURNAME/OutOfRange) or drop a comment on this page. Pull requests welcome.
+Found a bug, missing a class ability in auto-detect, or have an idea worth shipping? Open an issue on [GitHub](https://github.com/WowDonf/OutOfRange) or drop a comment on this page. Pull requests welcome.
+
+---
+
+## License
+
+All rights reserved. Bundled libraries under `Libs/` (LibStub, CallbackHandler-1.0, LibDataBroker-1.1, LibDBIcon-1.0) are distributed under their own respective licenses by their original authors. See the LICENSE file in the source repository for details.

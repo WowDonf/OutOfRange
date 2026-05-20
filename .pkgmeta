@@ -32,7 +32,6 @@ ignore:
   - .github
   - .gitignore
   - CurseForge-description.md
-  - CurseForge-release-notes.md
   - README.md
   - RELEASING.md
 
