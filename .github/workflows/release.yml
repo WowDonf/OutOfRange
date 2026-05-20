@@ -10,6 +10,10 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
+    # GitHub Releases need contents:write; the default GITHUB_TOKEN
+    # for newer repos is read-only without this block.
+    permissions:
+      contents: write
     steps:
       - name: Check out
         uses: actions/checkout@v4
