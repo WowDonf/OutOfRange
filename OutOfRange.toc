@@ -2,7 +2,7 @@
 ## Title: OutOfRange
 ## Notes: Flashes a warning on screen whenever your current target is out of range of a tracked ability.
 ## Author: Donf
-## Version: 1.10.2
+## Version: 1.10.3
 ## X-Curse-Project-ID: 1544233
 ## X-Wago-ID: RNLkA0Go
 ## SavedVariablesPerCharacter: OutOfRangeDB
