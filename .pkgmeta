@@ -1,0 +1,46 @@
+# Configuration for the BigWigs packager (CurseForge / Wago / GitHub Releases).
+# Reference: https://github.com/BigWigsMods/packager/wiki
+#
+# At build time, every external below is fetched fresh from its upstream
+# source and overwrites the committed copy in Libs/. This means:
+#   * Local clones still work for development (Libs/ is committed).
+#   * Released zips always contain the latest published library versions.
+#   * You never need to manually update Libs/.
+
+package-as: OutOfRange
+
+# Where libraries come from. These four addresses are the canonical homes of
+# the libraries on the WoWAce/CurseForge SVN; the packager understands SVN
+# externals natively.
+externals:
+  Libs/LibStub:
+    url: https://repos.curseforge.com/wow/libstub/trunk
+    type: svn
+  Libs/CallbackHandler-1.0:
+    url: https://repos.wowace.com/wow/callbackhandler/trunk/CallbackHandler-1.0
+    type: svn
+  Libs/LibDataBroker-1.1:
+    url: https://repos.curseforge.com/wow/libdatabroker-1-1/trunk
+    type: svn
+  Libs/LibDBIcon-1.0:
+    url: https://repos.curseforge.com/wow/libdbicon-1-0/trunk/LibDBIcon-1.0
+    type: svn
+
+# Files and directories that exist in the repo but should NOT ship inside the
+# released zip. Anything not listed gets packaged.
+ignore:
+  - .github
+  - .gitignore
+  - CurseForge-description.md
+  - CurseForge-release-notes.md
+  - README.md
+  - RELEASING.md
+
+# Source the changelog from CHANGELOG.md (rendered as Markdown on the listings).
+manual-changelog:
+  filename: CHANGELOG.md
+  markup-type: markdown
+
+# CurseForge categories. "combat" is appropriate for a range-warning addon;
+# add more if you like.
+enable-nolib-creation: no

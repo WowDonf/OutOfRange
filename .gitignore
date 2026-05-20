@@ -1,0 +1,22 @@
+# Build output (BigWigs packager writes here on local dry-runs)
+.release/
+*.zip
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS junk
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Lua bytecode (if you ever run luac locally)
+*.luac
+
+# WoW SavedVariables (in case you ever symlink this into AddOns and
+# accidentally have your character DB inside the dev folder)
+*.lua.bak

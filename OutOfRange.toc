@@ -1,0 +1,22 @@
+## Interface: 120005
+## Title: OutOfRange
+## Notes: Flashes a warning on screen whenever your current target is out of range of a tracked ability.
+## Author: Donf
+## Version: 1.10.2
+## X-Curse-Project-ID: 1544233
+## X-Wago-ID: RNLkA0Go
+## SavedVariablesPerCharacter: OutOfRangeDB
+## IconTexture: Interface\AddOns\OutOfRange\Icon.png
+## Category-enUS: Combat
+## AddonCompartmentFunc: OutOfRange_OnAddonCompartmentClick
+## AddonCompartmentFuncOnEnter: OutOfRange_OnAddonCompartmentEnter
+## AddonCompartmentFuncOnLeave: OutOfRange_OnAddonCompartmentLeave
+
+Libs\LibStub\LibStub.lua
+Libs\CallbackHandler-1.0\CallbackHandler-1.0.lua
+Libs\LibDataBroker-1.1\LibDataBroker-1.1.lua
+Libs\LibDBIcon-1.0\LibDBIcon-1.0.lua
+
+OutOfRange.lua
+Options.lua
+Minimap.lua
