@@ -9,9 +9,10 @@
 
 package-as: OutOfRange
 
-# Where libraries come from. These four addresses are the canonical homes of
-# the libraries on the WoWAce/CurseForge SVN; the packager understands SVN
-# externals natively.
+# Where libraries come from. The packager fetches each external fresh at
+# build time. Most still live on the WoWAce/CurseForge SVN; LibDataBroker
+# uses its canonical GitHub mirror because the CurseForge SVN host has
+# been intermittently returning 500s.
 externals:
   Libs/LibStub:
     url: https://repos.curseforge.com/wow/libstub/trunk
@@ -20,8 +21,8 @@ externals:
     url: https://repos.wowace.com/wow/callbackhandler/trunk/CallbackHandler-1.0
     type: svn
   Libs/LibDataBroker-1.1:
-    url: https://repos.curseforge.com/wow/libdatabroker-1-1/trunk
-    type: svn
+    url: https://github.com/tekkub/libdatabroker-1-1.git
+    type: git
   Libs/LibDBIcon-1.0:
     url: https://repos.curseforge.com/wow/libdbicon-1-0/trunk/LibDBIcon-1.0
     type: svn
