@@ -1,10 +1,18 @@
-# Build output (BigWigs packager writes here on local dry-runs)
+# BigWigs packager build artifacts
 .release/
+.pkg/
+release/
 *.zip
 
+# Python tooling (asset/build scripts under tools/)
+__pycache__/
+*.pyc
+tools/.venv/
+
 # Editor / IDE
-.vscode/
 .idea/
+.vscode/
+*.code-workspace
 *.swp
 *.swo
 *~
@@ -14,9 +22,6 @@
 Thumbs.db
 Desktop.ini
 
-# Lua bytecode (if you ever run luac locally)
+# Lua bytecode / backups (if you ever run luac locally)
 *.luac
-
-# WoW SavedVariables (in case you ever symlink this into AddOns and
-# accidentally have your character DB inside the dev folder)
 *.lua.bak
