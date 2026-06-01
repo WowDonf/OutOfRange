@@ -7,7 +7,7 @@
 --  is a single call - the layout cursor and scroll height adjust automatically.
 -- =============================================================================
 
-local addonName, ns = ...
+local _, ns = ...
 
 -- Forward declarations for things referenced inside callbacks before they exist.
 local RefreshAll, UpdatePreview, abilityDropdown, soundDropdown, channelDropdown, previewButton, unitDropdown, profileLabel

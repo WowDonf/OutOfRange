@@ -7,7 +7,7 @@
 ## X-Wago-ID: RNLkA0Go
 ## SavedVariablesPerCharacter: OutOfRangeDB
 ## IconTexture: Interface\AddOns\OutOfRange\Icon.png
-## Category-enUS: Combat
+## Category-enUS: OutOfRange
 ## AddonCompartmentFunc: OutOfRange_OnAddonCompartmentClick
 ## AddonCompartmentFuncOnEnter: OutOfRange_OnAddonCompartmentEnter
 ## AddonCompartmentFuncOnLeave: OutOfRange_OnAddonCompartmentLeave
