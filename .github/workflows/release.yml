@@ -1,7 +1,8 @@
 name: Release
 
-# Triggers on any tag that starts with "v" (e.g. v1.7.1, v2.0.0).
-# Push the tag and the build/upload happens automatically.
+# Triggers on annotated `v*` tag pushes (e.g. `git tag -a v1.0.1 -m "v1.0.1"; git push origin v1.0.1`).
+# Tags that don't start with `v` (e.g. `b1.1.1`, `prod`, `draft-1`) are ignored so non-release
+# tags can't accidentally publish to CurseForge / Wago.
 on:
   push:
     tags:
@@ -10,25 +11,21 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
-    # GitHub Releases need contents:write; the default GITHUB_TOKEN
-    # for newer repos is read-only without this block.
+    # Scoped to this job (least privilege): only `release` needs write access
+    # to create the GitHub Release. Any job added later stays read-only.
     permissions:
       contents: write
+    env:
+      # Configure these secrets under Settings → Secrets and variables → Actions.
+      # GITHUB_OAUTH is auto-provided; nothing to add for it.
+      CF_API_KEY:     ${{ secrets.CF_API_KEY }}
+      WAGO_API_TOKEN: ${{ secrets.WAGO_API_TOKEN }}
+      GITHUB_OAUTH:   ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - name: Check out
-        uses: actions/checkout@v4
+      - name: Clone project
+        uses: actions/checkout@v5
         with:
-          # Fetch full history so the packager can build a useful changelog
-          # from commits if you ever switch off the manual-changelog file.
-          fetch-depth: 0
+          fetch-depth: 0   # full history; the packager inspects tags and prior commits
 
       - name: Package and release
         uses: BigWigsMods/packager@v2
-        env:
-          # CurseForge API key (set as a GitHub repo secret, see SETUP below).
-          CF_API_KEY:      ${{ secrets.CF_API_KEY }}
-          # Wago API token (set as a GitHub repo secret).
-          WAGO_API_TOKEN:  ${{ secrets.WAGO_API_TOKEN }}
-          # GitHub token is provided automatically; this uploads the zip as a
-          # GitHub Release asset on the tag.
-          GITHUB_OAUTH:    ${{ secrets.GITHUB_TOKEN }}
