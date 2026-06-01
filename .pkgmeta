@@ -42,6 +42,6 @@ manual-changelog:
   filename: CHANGELOG.md
   markup-type: markdown
 
-# CurseForge categories. "combat" is appropriate for a range-warning addon;
-# add more if you like.
+# We embed our libraries directly, so there's no need for the packager to also
+# build a separate "nolib" zip (one with the externals stripped out).
 enable-nolib-creation: no
