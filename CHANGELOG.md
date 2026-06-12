@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.10.4
+
+- Updated for patch 12.0.7. The TOC now lists both interface versions (120005 and 120007), so the addon shows as up to date on the live patch and the new one. No behavior changes — the addon's range checks, sound, and options panel all use APIs unaffected by this patch, so this is purely a compatibility bump.
+
 ## v1.10.3
 
 - **Auto-update via the CurseForge app now works properly.** The CurseForge project ID was missing from earlier TOC files, which prevented the CurseForge app from recognizing installed copies for updates. You may need to reinstall once from CurseForge for the app to start tracking it.
