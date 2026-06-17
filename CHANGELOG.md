@@ -1,5 +1,9 @@
 # Changelog
 
+## v1.10.5
+
+- Lower idle CPU use. The range-check loop now only runs while there's actually something to check — a live, visible target (or focus/mouseover, depending on your setting), and, in combat-only mode, only while you're in combat. Previously it ran every frame whenever the addon was enabled, even with no target or while standing around out of combat. Alerts behave exactly the same; the addon just stops doing per-frame work when it has nothing to watch.
+
 ## v1.10.4
 
 - Updated for patch 12.0.7. The TOC now lists both interface versions (120005 and 120007), so the addon shows as up to date on the live patch and the new one. No behavior changes — the addon's range checks, sound, and options panel all use APIs unaffected by this patch, so this is purely a compatibility bump.

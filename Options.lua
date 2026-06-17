@@ -380,6 +380,7 @@ local function GenerateUnitMenu(_, root)
             function() return (P().trackedUnit or "target") == key end,
             function()
                 P().trackedUnit = key
+                ns.API.ApplySettings()   -- re-evaluate which unit the loop polls
                 C_Timer.After(0, function()
                     if unitDropdown then unitDropdown:GenerateMenu() end
                 end)
@@ -414,7 +415,7 @@ AddCheckbox("Enable OutOfRange",
 AddCheckbox("Only alert while in combat",
     "Suppress the warning unless you are in combat.",
     function() return P().onlyInCombat end,
-    function(v) P().onlyInCombat = v end)
+    function(v) P().onlyInCombat = v; ns.API.ApplySettings() end)
 
 AddCheckbox("Show minimap button",
     "Show a draggable button on the edge of the minimap. Left-click opens this panel, right-click toggles the addon on/off.",

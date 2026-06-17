@@ -346,13 +346,12 @@ updater:SetScript("OnUpdate", function(self, elapsed)
     if lastCheck < activeProfile.throttle then return end
     lastCheck = 0
 
-    if activeProfile.onlyInCombat and not UnitAffectingCombat("player") then
-        HideAlert()
-        return
-    end
-
     local unit = activeProfile.trackedUnit or "target"
-    if not HasValidUnit(unit) then
+    if (activeProfile.onlyInCombat and not UnitAffectingCombat("player"))
+       or not HasValidUnit(unit) then
+        -- Nothing worth watching right now. Stop the per-frame loop entirely;
+        -- the events below restart it the moment a unit / combat reappears.
+        self:Hide()
         HideAlert()
         return
     end
@@ -370,6 +369,37 @@ updater:SetScript("OnUpdate", function(self, elapsed)
 end)
 
 -- ---------------------------------------------------------------------------
+-- Polling gate
+--
+-- The OnUpdate loop above only needs to run when there is actually something
+-- to range-check: the addon is enabled, the combat gate (if any) is met, and
+-- the tracked unit exists / is alive / is visible. The rest of the time the
+-- loop is fully stopped, so an idle player (no target, or out of combat in
+-- combat-only mode) costs zero per-frame CPU. RefreshUpdater() is the single
+-- place that starts or stops the loop; it's driven by ApplySettings and by
+-- the target / focus / mouseover / combat events.
+-- ---------------------------------------------------------------------------
+local function ShouldPoll()
+    if not (activeProfile and activeProfile.enabled) then return false end
+    if activeProfile.onlyInCombat and not UnitAffectingCombat("player") then
+        return false
+    end
+    return HasValidUnit(activeProfile.trackedUnit or "target")
+end
+
+local function RefreshUpdater()
+    if ShouldPoll() then
+        if not updater:IsShown() then
+            lastCheck = activeProfile.throttle   -- range-check on the next frame
+            updater:Show()
+        end
+    else
+        updater:Hide()
+        HideAlert()
+    end
+end
+
+-- ---------------------------------------------------------------------------
 -- Settings application
 -- ---------------------------------------------------------------------------
 local function ApplySettings()
@@ -380,12 +410,7 @@ local function ApplySettings()
     alertFrame:SetScale(db.scale)
     alertText:SetText(db.text)
 
-    if db.enabled then
-        updater:Show()
-    else
-        updater:Hide()
-        HideAlert()
-    end
+    RefreshUpdater()
 end
 
 function ShowConfigMode(on)
@@ -517,6 +542,8 @@ events:RegisterEvent("SPELLS_CHANGED")
 events:RegisterEvent("PLAYER_TARGET_CHANGED")
 events:RegisterEvent("PLAYER_FOCUS_CHANGED")
 events:RegisterEvent("UPDATE_MOUSEOVER_UNIT")
+events:RegisterEvent("PLAYER_REGEN_DISABLED")
+events:RegisterEvent("PLAYER_REGEN_ENABLED")
 events:SetScript("OnEvent", function(self, event, arg1)
     if event == "ADDON_LOADED" and arg1 == addonName then
         OutOfRangeDB = OutOfRangeDB or {}
@@ -572,14 +599,17 @@ events:SetScript("OnEvent", function(self, event, arg1)
         or event == "TRAIT_CONFIG_UPDATED"
         or event == "SPELLS_CHANGED" then
         RefreshTrackedSpell()
+        RefreshUpdater()   -- start polling if we logged in / reloaded with a target
     elseif event == "PLAYER_TARGET_CHANGED"
         or event == "PLAYER_FOCUS_CHANGED"
-        or event == "UPDATE_MOUSEOVER_UNIT" then
-        -- Hide the alert promptly when the unit we're tracking goes away.
-        -- The throttled updater would catch it eventually, but reacting on
-        -- the unit-change event makes the UI feel snappier.
-        local unit = activeProfile.trackedUnit or "target"
-        if not HasValidUnit(unit) then HideAlert() end
+        or event == "UPDATE_MOUSEOVER_UNIT"
+        or event == "PLAYER_REGEN_DISABLED"
+        or event == "PLAYER_REGEN_ENABLED" then
+        -- A trackable unit appeared/changed, or combat state flipped. Start
+        -- the polling loop when there's now something to check, and stop it
+        -- (clearing any alert) when there isn't. Reacting on the event rather
+        -- than waiting for the throttled loop also makes the UI feel snappier.
+        RefreshUpdater()
     end
 end)
 
@@ -626,6 +656,7 @@ SlashCmdList.OUTOFRANGE = function(msg)
         Print("Sound: " .. tostring(activeProfile.soundEnabled))
     elseif cmd == "combat" then
         activeProfile.onlyInCombat = not activeProfile.onlyInCombat
+        ApplySettings()
         Print("Only in combat: " .. tostring(activeProfile.onlyInCombat))
     elseif cmd == "unlock" then
         ns.API.SetUnlocked(true)
